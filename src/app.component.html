@@ -1,0 +1,53 @@
+<div class="bg-areia min-h-screen">
+  <app-header />
+
+  <main>
+    <app-hero />
+
+    <!-- Nova Seção de Introdução -->
+    <section id="introduction" class="py-16 md:py-24 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="font-slab text-3xl md:text-4xl font-bold text-goiaba tracking-tight">
+          Educar é dar sentido ao tempo
+        </h2>
+        <div class="mt-8 space-y-4 text-lg text-gray-700">
+          <p>
+            A LABirintar nasce com a missão de integrar educadores empreendedores, escolas e comunidades em uma rede que valoriza a infância, a cultura e a inovação pedagógica.
+          </p>
+          <p>
+            Na perspectiva da Educação Integral, propomos organizar o tempo expandido das crianças em eixos pedagógicos, que estruturam experiências ricas, diversificadas e coerentes.
+          </p>
+          <p>
+            Cada eixo combina intencionalidade formativa com vivências práticas, permitindo que a escola oferte um currículo extracurricular encantador, estratégico e alinhado ao seu projeto pedagógico.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="proposal" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center">
+          <h2 class="font-slab text-3xl md:text-4xl font-bold text-chocolate tracking-tight">
+            O Programa: Experiências com Propósito
+          </h2>
+          <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-600">
+            Um currículo dinâmico e envolvente, projetado para despertar a curiosidade e construir habilidades essenciais.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          @for (axis of pedagogicalAxes; track axis.title) {
+            <app-proposal-axis [axis]="axis" />
+          }
+        </div>
+      </div>
+    </section>
+
+    <app-actors-view />
+
+    <app-lifecycle />
+
+  </main>
+
+  <app-footer />
+</div>
