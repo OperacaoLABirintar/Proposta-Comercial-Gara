@@ -1,8 +1,30 @@
 <div class="bg-areia min-h-screen">
-  <app-header />
+  <!-- Header Content -->
+  <header class="bg-areia/80 backdrop-blur-md sticky top-0 z-40">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-start h-20">
+        <div class="flex items-center">
+          <span class="font-slab text-2xl font-bold">
+            <span class="text-goiaba">LAB</span><span class="text-laranja">IRINTAR</span>
+          </span>
+        </div>
+      </div>
+    </nav>
+  </header>
 
   <main>
-    <app-hero />
+    <!-- Hero Content -->
+    <section class="relative bg-creme">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 text-center">
+        <h1 class="font-slab text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
+          <span class="block text-chocolate">Uma Proposta para a</span>
+          <span class="block text-goiaba">Gara School</span>
+        </h1>
+        <p class="mt-6 max-w-md mx-auto text-lg md:text-xl text-gray-700 sm:max-w-3xl">
+          Co-criando uma experiência extracurricular memorável, impulsionada pelo ecossistema LABirintar: Inovação, Cuidado e Encantamento.
+        </p>
+      </div>
+    </section>
 
     <!-- Nova Seção de Introdução -->
     <section id="introduction" class="py-16 md:py-24 bg-white">
@@ -36,18 +58,139 @@
         </div>
 
         <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Inlined Proposal Axis Content -->
           @for (axis of pedagogicalAxes; track axis.title) {
-            <app-proposal-axis [axis]="axis" />
+            <div class="flex flex-col rounded-2xl shadow-lg overflow-hidden h-full transition-transform duration-300 hover:scale-105" [class]="axis.bgColorClass">
+              <div class="flex-1 p-6 flex flex-col">
+                <div>
+                  <div class="flex items-center space-x-4">
+                      <div class="flex-shrink-0">
+                          <div class="p-3 rounded-xl" [class]="axis.bgColorClass === 'bg-creme' ? 'bg-lavanda' : 'bg-creme'">
+                              <svg class="h-6 w-6 text-chocolate" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="axis.icon"></path>
+                              </svg>
+                          </div>
+                      </div>
+                      <h3 class="text-xl font-slab font-bold text-chocolate">{{ axis.title }}</h3>
+                  </div>
+                  <p class="mt-4 text-base text-gray-700">{{ axis.pedagogicalIntent }}</p>
+                </div>
+                <div class="mt-6">
+                  <h4 class="font-semibold text-gray-800">Experiências:</h4>
+                  <ul class="mt-2 space-y-2 text-gray-700">
+                    @for(exp of axis.experiences; track exp.name) {
+                      <li>
+                        <p class="font-semibold">{{ exp.name }}</p>
+                        <p class="text-sm text-gray-600 pl-2">{{ exp.description }}</p>
+                      </li>
+                    }
+                  </ul>
+                </div>
+              </div>
+            </div>
           }
         </div>
       </div>
     </section>
 
-    <app-actors-view />
+    <!-- Actors View Content -->
+    <section id="platform" class="bg-white py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2 class="font-slab text-3xl md:text-4xl font-bold text-chocolate tracking-tight">
+            Uma Plataforma para Todos
+          </h2>
+          <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-600">
+            Ferramentas intuitivas para simplificar a gestão, potencializar a educação e conectar a comunidade escolar.
+          </p>
+        </div>
+        <div class="mt-12 grid md:grid-cols-3 gap-8 text-left">
+          <div class="bg-creme p-6 rounded-lg">
+            <h3 class="font-slab text-xl font-bold text-chocolate">Gestão Simplificada e Inteligente</h3>
+            <ul class="mt-4 space-y-2 text-gray-700">
+              <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Dashboard de matrículas</li>
+              <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Gestão financeira automatizada</li>
+              <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Gestão orientada a dados</li>
+            </ul>
+          </div>
+          <div class="bg-lavanda p-6 rounded-lg">
+            <h3 class="font-slab text-xl font-bold text-chocolate">Jornada do Educador</h3>
+            <ul class="mt-4 space-y-2 text-gray-700">
+              <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Curadoria de Experiências</li>
+              <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Trilhas Formativas para a Rede de Educadores</li>
+              <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Documentação pedagógica Ágil e Intuitiva</li>
+            </ul>
+          </div>
+          <div class="bg-hortencia p-6 rounded-lg">
+            <h3 class="font-slab text-xl font-bold text-chocolate">Jornada da Família</h3>
+            <ul class="mt-4 space-y-2 text-gray-700">
+              <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Matrícula online simplificada</li>
+              <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Comunicação fluida</li>
+              <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Portfólio digital do aluno</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <app-lifecycle />
-
+    <!-- Lifecycle Content -->
+    <section id="journey" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-creme">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center">
+          <h2 class="font-slab text-3xl md:text-4xl font-bold text-chocolate tracking-tight">
+            Nossa Jornada Juntos
+          </h2>
+          <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-600">
+            Uma parceria construída em três fases, garantindo sucesso da captação ao encantamento contínuo.
+          </p>
+        </div>
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+          <div class="p-6">
+            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-laranja text-white mx-auto text-2xl font-bold">1</div>
+            <h3 class="mt-6 font-slab text-xl font-bold text-chocolate">Captação & Lançamento</h3>
+            <p class="mt-2 text-gray-600">
+              Criação de uma página de matrículas personalizada, materiais de marketing e suporte na organização de eventos de lançamento para engajar as famílias desde o primeiro dia.
+            </p>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-laranja text-white mx-auto text-2xl font-bold">2</div>
+            <h3 class="mt-6 font-slab text-xl font-bold text-chocolate">Operação & Acompanhamento</h3>
+            <p class="mt-2 text-gray-600">
+              Onboarding completo para a rede de educadores LABirintar. Suporte técnico e pedagógico contínuo para garantir uma execução fluida e de alta qualidade das atividades.
+            </p>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-laranja text-white mx-auto text-2xl font-bold">3</div>
+            <h3 class="mt-6 font-slab text-xl font-bold text-chocolate">Encantamento & Evolução</h3>
+            <p class="mt-2 text-gray-600">
+              Coleta de feedbacks, análise de dados de engajamento e relatórios de impacto. Planejamento conjunto para a evolução do programa, introduzindo novas experiências e fortalecendo a comunidade.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <app-footer />
+  <!-- Footer Content -->
+  <footer class="bg-chocolate">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-slab text-3xl font-bold text-white">
+        Vamos juntos dar um novo sentido ao tempo?
+      </h2>
+      <p class="mt-4 text-lg text-creme">
+        Estamos prontos para construir esta parceria com a Gara School.
+      </p>
+      <div class="mt-8">
+        <a href="https://www.labirintar.com.br" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-chocolate font-semibold px-8 py-3 border border-transparent rounded-lg shadow-md hover:bg-gray-200 transition-all duration-200 transform hover:scale-105">
+          <span class="block text-sm">Visite nosso site</span>
+          <span class="block font-bold text-lg">www.labirintar.com.br</span>
+        </a>
+      </div>
+      <div class="mt-10 pt-8 border-t border-hortencia/20">
+        <p class="text-base text-creme">
+          &copy; 2025 LABirintar. Todos os direitos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
 </div>
