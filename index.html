@@ -133,7 +133,11 @@
       }
     ];
 
-    @Component({
+    class AppComponent {
+      pedagogicalAxes = pedagogicalAxesData;
+    }
+
+    Component({
       selector: 'app-root',
       imports: [ CommonModule ],
       changeDetection: ChangeDetectionStrategy.OnPush,
@@ -199,36 +203,32 @@
 
                 <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                   <!-- Inlined Proposal Axis Content -->
-                  @for (axis of pedagogicalAxes; track axis.title) {
-                    <div class="flex flex-col rounded-2xl shadow-lg overflow-hidden h-full transition-transform duration-300 hover:scale-105" [class]="axis.bgColorClass">
-                      <div class="flex-1 p-6 flex flex-col">
-                        <div>
-                          <div class="flex items-center space-x-4">
-                              <div class="flex-shrink-0">
-                                  <div class="p-3 rounded-xl" [class]="axis.bgColorClass === 'bg-creme' ? 'bg-lavanda' : 'bg-creme'">
-                                      <svg class="h-6 w-6 text-chocolate" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="axis.icon"></path>
-                                      </svg>
-                                  </div>
-                              </div>
-                              <h3 class="text-xl font-slab font-bold text-chocolate">{{ axis.title }}</h3>
-                          </div>
-                          <p class="mt-4 text-base text-gray-700">{{ axis.pedagogicalIntent }}</p>
+                  <div *ngFor="let axis of pedagogicalAxes" class="flex flex-col rounded-2xl shadow-lg overflow-hidden h-full transition-transform duration-300 hover:scale-105" [class]="axis.bgColorClass">
+                    <div class="flex-1 p-6 flex flex-col">
+                      <div>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="p-3 rounded-xl" [class]="axis.bgColorClass === 'bg-creme' ? 'bg-lavanda' : 'bg-creme'">
+                                    <svg class="h-6 w-6 text-chocolate" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="axis.icon"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-slab font-bold text-chocolate">{{ axis.title }}</h3>
                         </div>
-                        <div class="mt-6">
-                          <h4 class="font-semibold text-gray-800">Experiências:</h4>
-                          <ul class="mt-2 space-y-2 text-gray-700">
-                            @for(exp of axis.experiences; track exp.name) {
-                              <li>
-                                <p class="font-semibold">{{ exp.name }}</p>
-                                <p class="text-sm text-gray-600 pl-2">{{ exp.description }}</p>
-                              </li>
-                            }
-                          </ul>
-                        </div>
+                        <p class="mt-4 text-base text-gray-700">{{ axis.pedagogicalIntent }}</p>
+                      </div>
+                      <div class="mt-6">
+                        <h4 class="font-semibold text-gray-800">Experiências:</h4>
+                        <ul class="mt-2 space-y-2 text-gray-700">
+                          <li *ngFor="let exp of axis.experiences">
+                            <p class="font-semibold">{{ exp.name }}</p>
+                            <p class="text-sm text-gray-600 pl-2">{{ exp.description }}</p>
+                          </li>
+                        </ul>
                       </div>
                     </div>
-                  }
+                  </div>
                 </div>
               </div>
             </section>
@@ -335,10 +335,8 @@
           </footer>
         </div>
       `,
-    })
-    class AppComponent {
-      pedagogicalAxes = pedagogicalAxesData;
-    }
+    })(AppComponent);
+
 
     bootstrapApplication(AppComponent, {
       providers: [provideZonelessChangeDetection()],

@@ -1,12 +1,4 @@
-
-import '@angular/compiler';
-import { bootstrapApplication } from '@angular/platform-browser';
-import { provideZonelessChangeDetection } from '@angular/core';
-
-import { AppComponent } from './src/app.component';
-
-bootstrapApplication(AppComponent, {
-  providers: [provideZonelessChangeDetection()],
-}).catch((err) => console.error(err));
+// This file is intentionally left blank.
+// The entire application logic is self-contained within index.html to ensure compatibility with static hosting platforms like GitHub Pages.
 
 // AI Studio always uses an `index.tsx` file for all project types.
