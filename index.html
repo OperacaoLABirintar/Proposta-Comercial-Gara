@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -52,5 +51,298 @@
 </head>
 <body class="antialiased">
   <app-root></app-root>
+
+  <script type="module">
+    import '@angular/compiler';
+    import { Component, ChangeDetectionStrategy } from '@angular/core';
+    import { bootstrapApplication } from '@angular/platform-browser';
+    import { provideZonelessChangeDetection } from '@angular/core';
+    import { CommonModule } from '@angular/common';
+
+    const pedagogicalAxesData = [
+      {
+        title: 'Corpo e Movimento',
+        pedagogicalIntent: 'Valorizar o corpo como instrumento de expressão, vitalidade e cooperação. Desenvolver habilidades motoras, consciência corporal e espírito coletivo por meio de práticas lúdicas, artísticas e esportivas.',
+        experiences: [
+          { name: 'Circuito Acrobático Circense', description: 'Vivências de equilíbrio, acrobacias, cooperação e ludicidade.' },
+          { name: 'Práticas Esportivas Coletivas', description: 'Futebol cooperativo, queimada, mini-vôlei, basquete lúdico, handebol infantil, corridas de revezamento, jogos cooperativos...' },
+          { name: 'Práticas Esportivas Urbanas', description: 'Skate infantil, patins/patinete, slackline, circuitos de bike...' },
+        ],
+        icon: 'M13 10V3.25a.75.75 0 00-1.5 0V10H4.75a.75.75 0 000 1.5h6.5V18a.75.75 0 001.5 0v-6.5h6.5a.75.75 0 000-1.5H13z',
+        bgColorClass: 'bg-creme'
+      },
+      {
+        title: 'Arte, Cultura e Expressão',
+        pedagogicalIntent: 'Cultivar a imaginação, a oralidade e a expressão simbólica, valorizando a diversidade cultural e o encantamento artístico.',
+        experiences: [
+          { name: 'Teatro', description: 'Expressão cênica, improvisação e criação de personagens.' },
+          { name: 'Dança e Percussão', description: 'Integração de ritmo, música e movimento, ampliando a expressão coletiva.' },
+          { name: 'Contação de Histórias', description: 'Narrativas orais que encantam e fortalecem a imaginação.' },
+          { name: 'Brincadeiras Musicais', description: 'Valorização de tradições, cantos, ritmos e brincadeiras brasileiras.' },
+          { name: 'Improvisação e RPG', description: 'Liberdade criativa em movimento, escuta corporal e criação de narrativas coletivas.' },
+        ],
+        icon: 'M12 18.25a.75.75 0 00.75-.75V11h4.5a.75.75 0 000-1.5h-4.5V6.31l3.72 3.72a.75.75 0 001.06-1.06l-5-5a.75.75 0 00-1.06 0l-5 5a.75.75 0 101.06 1.06L11.25 6.31V9.5h-4.5a.75.75 0 000 1.5h4.5v6.5a.75.75 0 00.75.75z',
+        bgColorClass: 'bg-lavanda'
+      },
+      {
+        title: 'Manualidades',
+        pedagogicalIntent: 'Fortalecer a experiência sensorial, a autonomia e o prazer do fazer manual. Desenvolver coordenação fina e criatividade.',
+        experiences: [
+          { name: 'Marcenaria Criativa', description: 'Experimentação com madeira e construção de objetos com ferramentas seguras.' },
+          { name: 'Pães Artesanais', description: 'Experiência manual e coletiva, do amassar à partilha.' },
+          { name: 'Origami', description: 'Delicadeza, concentração e criação manual por meio da dobra.' },
+          { name: 'Modelagem 3D', description: 'Criação em novas linguagens, conectando o físico ao digital.' },
+        ],
+        icon: 'M10.75 5.5a.75.75 0 00-1.5 0v2.553L6.628 6.09a.75.75 0 00-1.036 1.09l2.75 2.6-2.75 2.6a.75.75 0 101.036 1.09L9.25 11.447V14.5a.75.75 0 001.5 0v-2.553l2.622 2.463a.75.75 0 101.036-1.09l-2.75-2.6 2.75-2.6a.75.75 0 00-1.036-1.09L10.75 8.053V5.5z',
+        bgColorClass: 'bg-hortencia'
+      },
+      {
+        title: 'Jogos, Lógica e Estratégia',
+        pedagogicalIntent: 'Estimular raciocínio lógico, tomada de decisão, cooperação e criatividade, explorando jogos analógicos, digitais e narrativos.',
+        experiences: [
+          { name: 'Criação de Jogos de Tabuleiro', description: 'Concepção, prototipagem e jogabilidade.' },
+          { name: 'Criação de Jogos Digitais', description: 'Lógica de programação criativa, storytelling e interatividade.' },
+          { name: 'Xadrez para a Vida', description: 'Desenvolvimento de pensamento estratégico e paciência.' },
+          { name: 'Robótica Sustentável', description: 'Montagem, lógica e resolução de problemas de forma lúdica.' },
+        ],
+        icon: 'M4.75 6.5a.75.75 0 01.75-.75h13.5a.75.75 0 010 1.5H5.5a.75.75 0 01-.75-.75zm0 5a.75.75 0 01.75-.75h13.5a.75.75 0 010 1.5H5.5a.75.75 0 01-.75-.75zm0 5a.75.75 0 01.75-.75H12a.75.75 0 010 1.5H5.5a.75.75 0 01-.75-.75z',
+        bgColorClass: 'bg-menta'
+      },
+      {
+        title: 'Cuidar de si, do outro e do mundo',
+        pedagogicalIntent: 'Favorecer o autoconhecimento, o equilíbrio emocional e a visão de futuro, integrando competências de vida e bem-estar.',
+        experiences: [
+          { name: 'Mindfulness e Yoga', description: 'Práticas de atenção plena, respiração e consciência corporal.' },
+          { name: 'Empreendedorismo', description: 'Vivências de criação, liderança e cooperação.' },
+          { name: 'Educação Financeira', description: 'Introdução lúdica a conceitos de planejamento e cuidado com recursos.' },
+        ],
+        icon: 'M11.646 2.354a.5.5 0 010 .708L5.707 9h6.793a.5.5 0 01.353.854l-4.5 4.5a.5.5 0 01-.707-.708L11.293 10H4.5a.5.5 0 01-.353-.854l4.5-4.5a.5.5 0 01.707.708L5.207 8h6.939l-4-4a.5.5 0 01.708-.708l4.5 4.5a.5.5 0 010 .708L8.207 13H15.5a.5.5 0 01.353.854l-4.5 4.5a.5.5 0 01-.707-.708l4.093-4.093H8.5a.5.5 0 01-.353-.854l4.5-4.5a.5.5 0 01.707-.708L8.707 12H16.5a.5.5 0 01.353.854l-4.5 4.5a.5.5 0 01-.708-.708L15.293 13H8.5a.5.5 0 010-1h6.793l-3.647-3.646a.5.5 0 01.708-.708l4.5 4.5z',
+        bgColorClass: 'bg-creme'
+      },
+      {
+        title: 'Cidade e Cultura Viva',
+        pedagogicalIntent: 'Valorizar a cidade como espaço educador e a cultura como expressão de pertencimento, memória e diversidade.',
+        experiences: [
+          { name: 'Cozinhas e Infâncias', description: 'Receitas ligadas à cultura e às memórias familiares (Educação Alimentar e Ambiental).' },
+          { name: 'Projeto CidadeVamos', description: 'Cartografias afetivas e mapeamento de espaços pelo entorno.' },
+          { name: 'Fotografia', description: 'Registro do olhar da criança e produção de sentido pela imagem.' },
+          { name: 'Cultura Urbana', description: 'Unindo esporte, cultura e música (roda de capoeira, parkour, danças de rua...).' },
+        ],
+        icon: 'M8.5 4.75a.75.75 0 01.75.75v13a.75.75 0 01-1.5 0v-13a.75.75 0 01.75-.75zM15.5 4.75a.75.75 0 01.75.75v13a.75.75 0 01-1.5 0v-13a.75.75 0 01.75-.75zM4.75 8.5a.75.75 0 01.75-.75h13a.75.75 0 010 1.5h-13a.75.75 0 01-.75-.75zM4.75 15.5a.75.75 0 01.75-.75h13a.75.75 0 010 1.5h-13a.75.75 0 01-.75-.75z',
+        bgColorClass: 'bg-lavanda'
+      }
+    ];
+
+    @Component({
+      selector: 'app-root',
+      imports: [ CommonModule ],
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      template: `
+        <div class="bg-areia min-h-screen">
+          <!-- Header Content -->
+          <header class="bg-areia/80 backdrop-blur-md sticky top-0 z-40">
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="flex items-center justify-start h-20">
+                <div class="flex items-center">
+                  <span class="font-slab text-2xl font-bold">
+                    <span class="text-goiaba">LAB</span><span class="text-laranja">IRINTAR</span>
+                  </span>
+                </div>
+              </div>
+            </nav>
+          </header>
+
+          <main>
+            <!-- Hero Content -->
+            <section class="relative bg-creme">
+              <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 text-center">
+                <h1 class="font-slab text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
+                  <span class="block text-chocolate">Uma Proposta para a</span>
+                  <span class="block text-goiaba">Gara School</span>
+                </h1>
+                <p class="mt-6 max-w-md mx-auto text-lg md:text-xl text-gray-700 sm:max-w-3xl">
+                  Co-criando uma experiência extracurricular memorável, impulsionada pelo ecossistema LABirintar: Inovação, Cuidado e Encantamento.
+                </p>
+              </div>
+            </section>
+
+            <!-- Nova Seção de Introdução -->
+            <section id="introduction" class="py-16 md:py-24 bg-white">
+              <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="font-slab text-3xl md:text-4xl font-bold text-goiaba tracking-tight">
+                  Educar é dar sentido ao tempo
+                </h2>
+                <div class="mt-8 space-y-4 text-lg text-gray-700">
+                  <p>
+                    A LABirintar nasce com a missão de integrar educadores empreendedores, escolas e comunidades em uma rede que valoriza a infância, a cultura e a inovação pedagógica.
+                  </p>
+                  <p>
+                    Na perspectiva da Educação Integral, propomos organizar o tempo expandido das crianças em eixos pedagógicos, que estruturam experiências ricas, diversificadas e coerentes.
+                  </p>
+                  <p>
+                    Cada eixo combina intencionalidade formativa com vivências práticas, permitindo que a escola oferte um currículo extracurricular encantador, estratégico e alinhado ao seu projeto pedagógico.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section id="proposal" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+              <div class="max-w-7xl mx-auto">
+                <div class="text-center">
+                  <h2 class="font-slab text-3xl md:text-4xl font-bold text-chocolate tracking-tight">
+                    O Programa: Experiências com Propósito
+                  </h2>
+                  <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-600">
+                    Um currículo dinâmico e envolvente, projetado para despertar a curiosidade e construir habilidades essenciais.
+                  </p>
+                </div>
+
+                <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                  <!-- Inlined Proposal Axis Content -->
+                  @for (axis of pedagogicalAxes; track axis.title) {
+                    <div class="flex flex-col rounded-2xl shadow-lg overflow-hidden h-full transition-transform duration-300 hover:scale-105" [class]="axis.bgColorClass">
+                      <div class="flex-1 p-6 flex flex-col">
+                        <div>
+                          <div class="flex items-center space-x-4">
+                              <div class="flex-shrink-0">
+                                  <div class="p-3 rounded-xl" [class]="axis.bgColorClass === 'bg-creme' ? 'bg-lavanda' : 'bg-creme'">
+                                      <svg class="h-6 w-6 text-chocolate" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="axis.icon"></path>
+                                      </svg>
+                                  </div>
+                              </div>
+                              <h3 class="text-xl font-slab font-bold text-chocolate">{{ axis.title }}</h3>
+                          </div>
+                          <p class="mt-4 text-base text-gray-700">{{ axis.pedagogicalIntent }}</p>
+                        </div>
+                        <div class="mt-6">
+                          <h4 class="font-semibold text-gray-800">Experiências:</h4>
+                          <ul class="mt-2 space-y-2 text-gray-700">
+                            @for(exp of axis.experiences; track exp.name) {
+                              <li>
+                                <p class="font-semibold">{{ exp.name }}</p>
+                                <p class="text-sm text-gray-600 pl-2">{{ exp.description }}</p>
+                              </li>
+                            }
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+            </section>
+
+            <!-- Actors View Content -->
+            <section id="platform" class="bg-white py-16 md:py-24">
+              <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                  <h2 class="font-slab text-3xl md:text-4xl font-bold text-chocolate tracking-tight">
+                    Uma Plataforma para Todos
+                  </h2>
+                  <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-600">
+                    Ferramentas intuitivas para simplificar a gestão, potencializar a educação e conectar a comunidade escolar.
+                  </p>
+                </div>
+                <div class="mt-12 grid md:grid-cols-3 gap-8 text-left">
+                  <div class="bg-creme p-6 rounded-lg">
+                    <h3 class="font-slab text-xl font-bold text-chocolate">Gestão Simplificada e Inteligente</h3>
+                    <ul class="mt-4 space-y-2 text-gray-700">
+                      <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Dashboard de matrículas</li>
+                      <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Gestão financeira automatizada</li>
+                      <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Gestão orientada a dados</li>
+                    </ul>
+                  </div>
+                  <div class="bg-lavanda p-6 rounded-lg">
+                    <h3 class="font-slab text-xl font-bold text-chocolate">Jornada do Educador</h3>
+                    <ul class="mt-4 space-y-2 text-gray-700">
+                      <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Curadoria de Experiências</li>
+                      <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Trilhas Formativas para a Rede de Educadores</li>
+                      <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Documentação pedagógica Ágil e Intuitiva</li>
+                    </ul>
+                  </div>
+                  <div class="bg-hortencia p-6 rounded-lg">
+                    <h3 class="font-slab text-xl font-bold text-chocolate">Jornada da Família</h3>
+                    <ul class="mt-4 space-y-2 text-gray-700">
+                      <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Matrícula online simplificada</li>
+                      <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Comunicação fluida</li>
+                      <li class="flex items-start"><span class="text-goiaba mr-2">&#10003;</span> Portfólio digital do aluno</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Lifecycle Content -->
+            <section id="journey" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-creme">
+              <div class="max-w-7xl mx-auto">
+                <div class="text-center">
+                  <h2 class="font-slab text-3xl md:text-4xl font-bold text-chocolate tracking-tight">
+                    Nossa Jornada Juntos
+                  </h2>
+                  <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-600">
+                    Uma parceria construída em três fases, garantindo sucesso da captação ao encantamento contínuo.
+                  </p>
+                </div>
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+                  <div class="p-6">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-laranja text-white mx-auto text-2xl font-bold">1</div>
+                    <h3 class="mt-6 font-slab text-xl font-bold text-chocolate">Captação & Lançamento</h3>
+                    <p class="mt-2 text-gray-600">
+                      Criação de uma página de matrículas personalizada, materiais de marketing e suporte na organização de eventos de lançamento para engajar as famílias desde o primeiro dia.
+                    </p>
+                  </div>
+                  <div class="p-6">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-laranja text-white mx-auto text-2xl font-bold">2</div>
+                    <h3 class="mt-6 font-slab text-xl font-bold text-chocolate">Operação & Acompanhamento</h3>
+                    <p class="mt-2 text-gray-600">
+                      Onboarding completo para a rede de educadores LABirintar. Suporte técnico e pedagógico contínuo para garantir uma execução fluida e de alta qualidade das atividades.
+                    </p>
+                  </div>
+                  <div class="p-6">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-laranja text-white mx-auto text-2xl font-bold">3</div>
+                    <h3 class="mt-6 font-slab text-xl font-bold text-chocolate">Encantamento & Evolução</h3>
+                    <p class="mt-2 text-gray-600">
+                      Coleta de feedbacks, análise de dados de engajamento e relatórios de impacto. Planejamento conjunto para a evolução do programa, introduzindo novas experiências e fortalecendo a comunidade.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
+
+          <!-- Footer Content -->
+          <footer class="bg-chocolate">
+            <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+              <h2 class="font-slab text-3xl font-bold text-white">
+                Vamos juntos dar um novo sentido ao tempo?
+              </h2>
+              <p class="mt-4 text-lg text-creme">
+                Estamos prontos para construir esta parceria com a Gara School.
+              </p>
+              <div class="mt-8">
+                <a href="https://www.labirintar.com.br" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-chocolate font-semibold px-8 py-3 border border-transparent rounded-lg shadow-md hover:bg-gray-200 transition-all duration-200 transform hover:scale-105">
+                  <span class="block text-sm">Visite nosso site</span>
+                  <span class="block font-bold text-lg">www.labirintar.com.br</span>
+                </a>
+              </div>
+              <div class="mt-10 pt-8 border-t border-hortencia/20">
+                <p class="text-base text-creme">
+                  &copy; 2025 LABirintar. Todos os direitos reservados.
+                </p>
+              </div>
+            </div>
+          </footer>
+        </div>
+      `,
+    })
+    class AppComponent {
+      pedagogicalAxes = pedagogicalAxesData;
+    }
+
+    bootstrapApplication(AppComponent, {
+      providers: [provideZonelessChangeDetection()],
+    }).catch((err) => console.error(err));
+  </script>
 </body>
 </html>
